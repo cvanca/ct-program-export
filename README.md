@@ -1,6 +1,7 @@
 # ct-program-export
 
-This repo contains an automatic tool for extracting the Czech public TV program from the official website and importing it to BQ in the Google Cloud Platform environment.
+This repo contains an automatic tool for extracting the Czech public TV program from
+the official website and importing it to BQ in the Google Cloud Platform environment.
 
 It uses the xmlstarlet tool, which must be installed prior to setup.
 
@@ -12,7 +13,7 @@ https://www.ceskatelevize.cz/xml/tv-program/
 If you have already set up your GCP project, you can skip this section.
 
 1. Prepare Google Cloud Project and enable billing. Remember project-id
-2. Enable apis PUB/SUB, Compute, Dataflow
+2. Enable apis PUB/SUB, Compute, Storage
 3. Create service account, download auth.json and remember service service-acount-email
 
 Following steps are optional. You can skip them if you already use gcloud command line tools.
@@ -24,7 +25,7 @@ Following steps are optional. You can skip them if you already use gcloud comman
 
 ## Install xmlstarlet
 
-Make sure there is xmlstarlet installed on your GCP Debian machine.
+Make sure there is xmlstarlet installed on your GCP Debian machine:
 
 `sudo apt-get xmlstarlet`
 
