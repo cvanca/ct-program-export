@@ -24,7 +24,7 @@ echo "Script initiated on $CURR_DATE" by $USER > $LOGFILE
 # https://www.ceskatelevize.cz/services-old/programme/xml/shedule.php?user=[login]&date=[dd.mm.rrrr]&channel=[ct1|ct2|ct24|ct4|ct5|ct6]
 
 # program url without parameters
-URL="https://www.ceskatelevize.cz/services-old/programme/xml/schedule.php?user=USERNAME"
+URL="https://www.ceskatelevize.cz/services-old/programme/xml/schedule.php?user=USERNAME_CT"
 
 # set date parameter for url
 URL_DATE="&date="$( date +"%d.%m.%Y" )
@@ -39,14 +39,14 @@ for i in "ct1" "ct2" "ct24" "ct4" "ct5" "ct6"; do
     echo -e "--$i--\n" >> $LOGFILE
     URL_CHANNEL="&channel=$i"
     URL_SET=$URL$URL_DATE$URL_CHANNEL
-    
+
     # Save as output format "YYYYMMDD_channel.xml"
     XML_FILE=${OUT_DATE}_$i.xml
     CSV_FILE=${OUT_DATE}_$i.csv
-    
+
     echo -e "# Downloading from $URL_SET \nas $IN_DIR/$XML_FILE" >> $LOGFILE
     wget $URL_SET --output-document=$IN_DIR/$XML_FILE >> $LOGFILE
-    
+
     sleep 2
     echo -en "\n" >> $LOGFILE
 
@@ -100,7 +100,7 @@ Destination bucket $BUCKET/$CSV_FILE" >> $LOGFILE
     # Import files from Cloud Storage into BQ
     echo "# Submitting import $CSV_FILE from Google Storage to Big Query" >> $LOGFILE
     sleep 2
-    
+
     # bq --location=[LOCATION] load --source_format=[FORMAT] [DATASET].[TABLE] [PATH_TO_SOURCE] [SCHEMA]
     echo "Destination table $BQ_DATA" >> $LOGFILE
     bq load \
@@ -113,7 +113,7 @@ Destination bucket $BUCKET/$CSV_FILE" >> $LOGFILE
 
     sleep 2
     echo -en "\n" >> $LOGFILE
-    
+
 done
 
 # Find the xml files with the date parameter in its name
